@@ -1,22 +1,25 @@
 # cereal_manager
 
-A Clojure library designed to ... well, that part is up to you.
+- *Project by Ken Broden, Cameron Walker*
+
+A Clojure library designed to analyze and perform operations on the 80 Cereals dataset.
+
+## Project Overview
+
+This project is part of CSci 2601 and focuses on analyzing a dataset of 80 cereals. The goal is to answer specific questions about the dataset using Clojure functions while exploring advanced features of the language. The project includes writing tutorials, exercises, and presenting findings.
+
+## Questions Answered
+
+1. **On average, which cereal manufacturer’s cereal has the fewest calories per serving?**
+2. **Display the cereals based on sugar content, from least to most.**
+3. **What are the 10 highest-rated cereals based on Consumer Reports?**
+
+## Features
+
+- Utilizes at least 5 pre-defined Clojure functions not covered in class.
+- Explores advanced Clojure features such as macros, transducers, or parallel execution.
+- Provides tutorials and exercises for selected functions.
 
 ## Usage
 
-FIXME
-
-## License
-
-Copyright © 2025 FIXME
-
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
-
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+This library provides functions to load the dataset and perform the above operations. To get started, ensure you have the dataset downloaded from [Kaggle](https://www.kaggle.com/datasets/crawford/80-cereals?resource=download) and follow the instructions in the source code.
