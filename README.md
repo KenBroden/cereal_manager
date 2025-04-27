@@ -17,6 +17,11 @@ This project is part of CSci 2601 and focuses on analyzing a dataset of 80 cerea
 ## Features
 
 - Utilizes at least 5 pre-defined Clojure functions not covered in class.
+  - `with-open` - Evaluates body in a try expression with names bound to the values of the inits, and a finally clause that calls (.close name) on each name in reverse order.
+  - `zipmap` - Returns a map with the keys mapped to the corresponding vals.
+  - `parseInt` - Parses string as a integer.
+  - `select-keys` - Returns a map containing only those entries in map whose key is in keys
+  - `doall` - Walks through the successive nexts of the seq, retains the head and returns it, thus causing the entire seq to reside in memory at one time.
 - Explores advanced Clojure features such as macros, transducers, or parallel execution.
 - Provides tutorials and exercises for selected functions.
 
