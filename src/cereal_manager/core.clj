@@ -67,31 +67,13 @@
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~EXERCISES~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; zipmap
 
-;; exercise 1 :
-;; Define a function report-card-builder that builds a hashmap using zipmap
-(def students ["Ed" "Fred" "Ted"])
-(def grades [90 80 70])
-
-;; example solution 1
-(defn report-card-builder
-  [studs grads]
-  (zipmap studs grads))
-
-(println "exercise 1: \n"
-          (report-card-builder students grades) "\n")
-
-;; exercise 2
-(def soda ["Coke" "Pepsi" "Sprite"])
-(def calories [140 150])
-
-;; solution 2
-(println "exercise 2: \n"
-         (zipmap soda calories) "\n")
+(defn inventory-builder
+  "Takes a sequence of item names and a sequence of quantities, and returns a map of items to quantities."
+  [items quantities]
+  (zipmap items quantities))
 
 
 ;; select-keys
-
-;; Explanation: select-keys returns a map of the keys inputted provided they exist in the dataset
 
 ;; exercise 3
 (def cereal-data
@@ -102,26 +84,9 @@
    {:name "Raisin Bran" :calories 120 :sugars 8 :cost 3.99}
    {:name "Special K" :calories 120 :sugars 4 :cost 4.49}])
 
-;;(def empty-data [])
-
-;; examples
-
-(println (map #(select-keys % [:sugars]) cereal-data) "\n")
-(println "Example use select-keys: "(select-keys {:name "Todd" :age 22 :height 150} [:name :age]))
-
-;; Use select-keys to get a all the cereal names in the collection.
-;; (You will need to use the map function as well)
-
-;; solution 3
-(println "exercise 3: \n"
-         (map #(select-keys % [:name]) cereal-data) "\n")
-
-;; exercise 4
-;; Use select-keys to get a all the costs of the cereals in the collection, with their names as well
-
-;; solution 4
-(println "exercise 4: \n"
-         (map #(select-keys % [:name :cost]) cereal-data) "\n")
-
+(defn filter-and-select
+  "Filters a collection of maps based on a predicate and extracts specific keys from the filtered maps."
+  [pred keys coll]
+  (map #(select-keys % keys) (filter pred coll)))
 
 
