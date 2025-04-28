@@ -86,6 +86,8 @@
 
 ;; select-keys
 
+;; Explanation: select-keys returns a map of the keys inputted provided they exist in the dataset
+
 ;; exercise 3
 (def cereal-data
   [{:name "Cocoa Puffs" :calories 110 :sugars 15 :cost 6.99}
@@ -94,6 +96,13 @@
    {:name "Lucky Charms" :calories 110 :sugars 10 :cost 7.99}
    {:name "Raisin Bran" :calories 120 :sugars 8 :cost 3.99}
    {:name "Special K" :calories 120 :sugars 4 :cost 4.49}])
+
+;;(def empty-data [])
+
+;; examples
+
+(println (map #(select-keys % [:sugars]) cereal-data) "\n")
+(println "Example use select-keys: "(select-keys {:name "Todd" :age 22 :height 150} [:name :age]))
 
 ;; Use select-keys to get a all the cereal names in the collection.
 ;; (You will need to use the map function as well)
@@ -108,4 +117,6 @@
 ;; solution 4
 (println "exercise 4: \n"
          (map #(select-keys % [:name :cost]) cereal-data) "\n")
+
+
 
