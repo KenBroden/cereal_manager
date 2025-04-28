@@ -27,6 +27,7 @@
     (csv/write-csv writer (cons (keys (first data)) data))))
 
 
+
 ;; ~~~~~~~~~~~~~~~~~~~~~SORTING DATA FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 ;; test sort by on the loaded data
 ;; (println "sort by calories: \n"
@@ -39,8 +40,24 @@
   [key coll]
   (sort-by #(Integer/parseInt (% key)) coll))
 
+;; average calories by a single mfr
+(defn avg-cal-by-mfr
+  "takes a mfr and a collection -> returns the average calories for that mfr, rounded to 2 decimal places"
+  [mfr coll]
+  (let [mfr-cereal (filter #(= (% :mfr) mfr) coll)
+        avg-calories (/ (reduce + (map #(Integer/parseInt (% :calories)) mfr-cereal))
+                        (count mfr-cereal))]
+    (Double/parseDouble (format "%.2f" (double avg-calories)))))
+
+
+
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~REPL TESTING~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; sort-cereal-by calories
 (println "sort by calories: \n"
          (map #(select-keys % [:name :calories])
               (sort-cereal-by :calories cereal)))
+
+;; println avg calories by Kellogg's
+(println "avg calories by Kellogg's: \n"
+         (avg-cal-by-mfr "K" cereal))
+
