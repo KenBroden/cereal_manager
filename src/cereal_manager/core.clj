@@ -53,11 +53,59 @@
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~REPL TESTING~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; sort-cereal-by calories
-(println "sort by calories: \n"
-         (map #(select-keys % [:name :calories])
-              (sort-cereal-by :calories cereal)))
+(println "sort by calories: ")
+(doseq [cereal (map #(select-keys % [:name :calories])
+              (sort-cereal-by :calories cereal))]
+  (println cereal))
 
 ;; println avg calories by Kellogg's
 (println "avg calories by Kellogg's: \n"
          (avg-cal-by-mfr "K" cereal))
+
+
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~EXERCISES~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; zipmap
+
+;; exercise 1
+(def students ["Ed" "Fred" "Ted"])
+(def grades [90 80 70])
+
+;; solution 1
+(println "exercise 1: \n"
+         (zipmap students grades) "\n")
+
+;; exercise 2
+(def soda ["Coke" "Pepsi" "Sprite"])
+(def calories [140 150])
+
+;; solution 2
+(println "exercise 2: \n"
+         (zipmap soda calories) "\n")
+
+
+;; select-keys
+
+;; exercise 3
+(def cereal-data
+  [{:name "Cocoa Puffs" :calories 110 :sugars 15 :cost 6.99}
+   {:name "Fruit Loops" :calories 110 :sugars 12 :cost 5.99}
+   {:name "Honey Bunches of Oats" :calories 110 :sugars 9 :cost 4.99}
+   {:name "Lucky Charms" :calories 110 :sugars 10 :cost 7.99}
+   {:name "Raisin Bran" :calories 120 :sugars 8 :cost 3.99}
+   {:name "Special K" :calories 120 :sugars 4 :cost 4.49}])
+
+;; Use select-keys to get a all the cereal names in the collection.
+;; (You will need to use the map function as well)
+
+;; solution 3
+(println "exercise 3: \n"
+         (map #(select-keys % [:name]) cereal-data) "\n")
+
+;; exercise 4
+;; Use select-keys to get a all the cost of the cereals in the collection, with their names as well
+
+;; solution 4
+(println "exercise 4: \n"
+         (map #(select-keys % [:name :cost]) cereal-data) "\n")
 
