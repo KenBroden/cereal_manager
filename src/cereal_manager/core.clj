@@ -67,13 +67,18 @@
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~EXERCISES~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; zipmap
 
-;; exercise 1
+;; exercise 1 :
+;; Define a function report-card-builder that builds a hashmap using zipmap
 (def students ["Ed" "Fred" "Ted"])
 (def grades [90 80 70])
 
-;; solution 1
+;; example solution 1
+(defn report-card-builder
+  [studs grads]
+  (zipmap studs grads))
+
 (println "exercise 1: \n"
-         (zipmap students grades) "\n")
+          (report-card-builder students grades) "\n")
 
 ;; exercise 2
 (def soda ["Coke" "Pepsi" "Sprite"])
@@ -112,7 +117,7 @@
          (map #(select-keys % [:name]) cereal-data) "\n")
 
 ;; exercise 4
-;; Use select-keys to get a all the cost of the cereals in the collection, with their names as well
+;; Use select-keys to get a all the costs of the cereals in the collection, with their names as well
 
 ;; solution 4
 (println "exercise 4: \n"
