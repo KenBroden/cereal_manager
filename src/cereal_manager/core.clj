@@ -57,7 +57,7 @@
 ;; ~~~~~~~~~~~~~~~~~~~Implementation~~~~~~~~~~~~~~~~~~~~
 
 ;; println avg calories by Kellogg's
-(println "avg calories by Kellogg's: \n"
+(println "\navg calories by Kellogg's: \n"
          (avg-cal-by-mfr "K" cereal))
 
 ;; QUESTION: What are the sugar contents of the cereals? sort from least to most.
@@ -71,7 +71,7 @@
 ;; ~~~~~~~~~~~~~~~~~~~Implementation~~~~~~~~~~~~~~~~~~~~
 
 ;; sort-cereal-by calories
-(println "sort by calories: ")
+(println "\nsort by calories: ")
 (doseq [cereal (map #(select-keys % [:name :calories])
                     (sort-cereal-by :calories cereal))]
   (println cereal))
@@ -91,9 +91,8 @@
 
 ;; ~~~~~~~~~~~~~~~~~~~Implementation~~~~~~~~~~~~~~~~~~~~
 
-(println "top 10 cereals by rating: ")
-(doseq [[index cereal] (map-indexed (fn [i cereal]
-                                      [(inc i) cereal]) ;; Increment index to start numbering from 1
+(println "\ntop 10 cereals by rating: ")
+(doseq [[index cereal] (map-indexed (fn [i cereal] [(inc i) cereal]) ;; Increment index
                                     (map #(select-keys % [:name :rating])
                                          (top-n :rating cereal 10)))]
-  (println (str index ". " cereal)))
+  (println (str index ". " cereal))) ;; adds index with a period to front.
