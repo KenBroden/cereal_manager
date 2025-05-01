@@ -5,7 +5,7 @@
 
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~DATA HANDLING~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; load the data into a hashmap
+;; load the data into a collection of hashmaps
 (defn load-data
   "takes a file path to a .csv file -> returns a hashmap of the data"
   [file-path]
@@ -14,6 +14,14 @@
           headers (map keyword (first rows))
           data (rest rows)]
       (map #(zipmap headers %) data))))
+
+;; each map represents a row in the csv file
+;; the keys are the column headers
+;; the values are the data in each row
+
+;; upside of this function: all data is in a single collection
+;; downside: we are gonna be passing a bunch of data thru our 
+;; functions which is not used at all. but having it promotes flexibility.
 
 ;; hashmap to use throughout the program
 (def cereal
