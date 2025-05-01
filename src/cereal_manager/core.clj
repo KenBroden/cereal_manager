@@ -3,6 +3,11 @@
    [clojure.data.csv :as csv] ;; for handling csv files
    [clojure.java.io :as io])) ;; for file reading
 
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~Cereal Manager~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; This program is a cereal manager that loads a csv file of cereal data
+;; and allows the user to perform various operations on the data.
+
+;; Completed by Cameron Walker and Ken Broden 
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~DATA HANDLING~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; load the data into a collection of hashmaps
@@ -70,11 +75,25 @@
 (doseq [cereal (map #(select-keys % [:name :calories])
                     (sort-cereal-by :calories cereal))]
   (println cereal))
+;; doseq here just iterates over the collection, it allows us to 
+;; print each return value on a new line.
 
 ;; QUESTION: What are the 10 highest-rated cereals based on Consumer Reports?
 ;; ~~~~~~~~~~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
+;; top 10 of a sorting key
+(defn top-n
+  "takes a key, a collection, and a number n for how many data points to return
+   -> returns the top n elements of the collection sorted by the key"
+  [key coll n]
+  (take n (sort-by #(Double/parseDouble (% key)) coll)))
 
 
 ;; ~~~~~~~~~~~~~~~~~~~Implementation~~~~~~~~~~~~~~~~~~~~
 
+(println "top 10 cereals by rating: ")
+(doseq [[index cereal] (map-indexed (fn [i cereal]
+                                      [(inc i) cereal]) ;; Increment index to start numbering from 1
+                                    (map #(select-keys % [:name :rating])
+                                         (top-n :rating cereal 10)))]
+  (println (str index ". " cereal)))

@@ -23,6 +23,7 @@ This project is part of CSci 2601 and focuses on analyzing a dataset of 80 cerea
   - `select-keys` - Returns a map containing only those entries in map whose key is in keys
   - `doall` - Walks through the successive nexts of the seq, retains the head and returns it, thus causing the entire seq to reside in memory at one time.
   - `doseq` - Repeatedly executes body (presumably for side-effects) with bindings and filtering as provided by "for".  Does not retain the head of the sequence. Returns nil.
+  - `map-indexed` - Returns a lazy seq of the items in coll, where each item is a vector of the index and the item.
   - `format` - In general, if you want to use floating-point formats %e, %f, %g, or %a with format or printf, and you don't know whether the values you want to format are floats or doubles you should convert them:
 
     ```console
