@@ -75,6 +75,10 @@
           nil
           (distinct (map :mfr coll))))
 
+;; distinct is a higher order function that takes a collection,
+;; and returns a new collection with all the duplicates removed
+;; so then we have a collection of all the unique manufacturers
+
 ;; ~~~~~~~~~~~~~~~~~~~Implementation~~~~~~~~~~~~~~~~~~~~
 
 ;; println avg calories by Kellogg's
