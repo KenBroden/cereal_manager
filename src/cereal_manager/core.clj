@@ -51,7 +51,7 @@
 ;; QUESTION: On average, which cereal manufacturer’s cereal has the fewest calories per serving?
 ;; ~~~~~~~~~~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
-;; average calories by a single mfr
+;; average calories by a single mfr - helper function
 (defn avg-cal-by-mfr
   "takes a mfr and a collection -> returns the average calories for that mfr, rounded to 2 decimal places"
   [mfr coll]
@@ -64,13 +64,26 @@
 ;; then uses reduce to add up the calories and then divides by the count of the cereals
 ;; Needs to parseInt because the load function returns strings
 
-;;**insert Cameron's code
+(defn lowest-avg-cal
+  "Takes the cereal data and returns the manufacturers that have the lowest average calories"
+  [coll]
+  (reduce (fn [lowest mfr]
+            (let [avg-cal (avg-cal-by-mfr mfr coll)]
+              (if (or (nil? lowest) (< avg-cal (lowest :avg-cal)))
+                {:mfr mfr :avg-cal avg-cal}
+                lowest)))
+          nil
+          (distinct (map :mfr coll))))
 
 ;; ~~~~~~~~~~~~~~~~~~~Implementation~~~~~~~~~~~~~~~~~~~~
 
 ;; println avg calories by Kellogg's
 (println "\navg calories by Kellogg's: \n"
          (avg-cal-by-mfr "K" cereal))
+
+(println "\nOn average, which cereal manufacturer’s cereal has the fewest calories per serving?")
+(println "Manufacturer with lowest average calories: \n"
+         (lowest-avg-cal cereal))
 
 ;; QUESTION: What are the sugar contents of the cereals? sort from least to most.
 ;; ~~~~~~~~~~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
