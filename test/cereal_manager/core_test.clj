@@ -2,7 +2,7 @@
   (:require [clojure.test :refer [deftest is testing]]
             [cereal-manager.core :refer [top-rank]]))
 
-(deftest test-top-n
+(deftest test-top-rank
   (testing "Testing the top-n function"
     ;; basic case
     (is (= [{:name "Cereal A" :rating "90.5"}
