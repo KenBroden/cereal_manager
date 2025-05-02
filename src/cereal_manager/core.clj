@@ -71,7 +71,8 @@
 ;; ~~~~~~~~~~~~~~~~~~~Implementation~~~~~~~~~~~~~~~~~~~~
 
 ;; sort-cereal-by calories
-(println "\nsort by calories: ")
+(println "\nWhat are the sugar contents of the cereals? sort from least to most.")
+(println "sort by calories: ")
 (doseq [cereal (map #(select-keys % [:name :calories])
                     (sort-cereal-by :calories cereal))]
   (println cereal))
@@ -82,17 +83,32 @@
 ;; ~~~~~~~~~~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
 ;; top 10 of a sorting key
-(defn top-n
+(defn top-rank
   "takes a key, a collection, and a number n for how many data points to return
    -> returns the top n elements of the collection sorted by the key"
   [key coll n]
-  (take n (sort-by #(Double/parseDouble (% key)) coll)))
+  (take n (sort-by #(Double/parseDouble (% key)) > coll)))
+
+;; bottom 10 of a sorting key
+(defn bottom-rank
+  "takes a key, a collection, and a number n for how many data points to return
+   -> returns the bottom n elements of the collection sorted by the key"
+  [key coll n]
+  (take n (sort-by #(Double/parseDouble (% key)) < coll)))
+
+;; this question wasn't asked, but it was an easy one to add, and interesting results.
 
 
 ;; ~~~~~~~~~~~~~~~~~~~Implementation~~~~~~~~~~~~~~~~~~~~
-
-(println "\ntop 10 cereals by rating: ")
+(println "\nWhat are the 10 highest-rated cereals based on Consumer Reports?")
+(println "top 10 cereals by rating: ")
 (doseq [[index cereal] (map-indexed (fn [i cereal] [(inc i) cereal]) ;; Increment index
                                     (map #(select-keys % [:name :rating])
-                                         (top-n :rating cereal 10)))]
+                                         (top-rank :rating cereal 10)))]
+  (println (str index ". " cereal))) ;; adds index with a period to front.
+
+(println "\nbottom 10 cereals by rating: ")
+(doseq [[index cereal] (map-indexed (fn [i cereal] [(inc i) cereal]) ;; Increment index
+                                      (map #(select-keys % [:name :rating])
+                                           (bottom-rank :rating cereal 10)))]
   (println (str index ". " cereal))) ;; adds index with a period to front.

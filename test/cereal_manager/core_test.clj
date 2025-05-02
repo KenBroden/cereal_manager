@@ -1,23 +1,35 @@
 (ns cereal-manager.core-test
   (:require [clojure.test :refer [deftest is testing]]
-            [cereal-manager.core :refer [inventory-builder filter-and-select cereal-data]]))
+            [cereal-manager.core :refer [top-rank]]))
 
-;; (deftest test-filter-and-select
-;;   (testing "Testing filter-and-select with cereal data"
-;;     (is (= [{:name "Cocoa Puffs"} {:name "Fruit Loops"} {:name "Honey Bunches of Oats"} {:name "Lucky Charms"}] ;; expected
-;;            (filter-and-select #(<= (:calories %) 110) [:name] cereal-data)))
-;;     (is (= [{:name "Cocoa Puffs", :cost 6.99} {:name "Fruit Loops", :cost 5.99} {:name "Lucky Charms", :cost 7.99}] ;; expected
-;;            (filter-and-select #(> (:cost %) 5.00) [:name :cost] cereal-data)))
-;;     (is (= [] ;; expected
-;;            (filter-and-select #(<= (:calories %) 110) [:name] [])))))
+(deftest test-top-n
+  (testing "Testing the top-n function"
+    ;; basic case
+    (is (= [{:name "Cereal A" :rating "90.5"}
+            {:name "Cereal B" :rating "85.3"}]
+           (top-rank :rating
+                     [{:name "Cereal A" :rating "90.5"}
+                      {:name "Cereal B" :rating "85.3"}
+                      {:name "Cereal C" :rating "70.2"}]
+                     2)))
 
-;; (deftest test-inventory-builder
-;;   (testing "Testing the inventory-builder function"
-;;     (is (= {"Apples" 10, "Bananas" 20, "Cherries" 30} ;; expected
-;;            (inventory-builder ["Apples" "Bananas" "Cherries"] [10 20 30])))
-;;     (is (= {"Apples" 10, "Bananas" 20} ;; expected
-;;            (inventory-builder ["Apples" "Bananas"] [10 20 30])))
-;;     (is (= {} ;; expected
-;;            (inventory-builder [] [])))
-;;     (is (= {} ;; expected
-;;            (inventory-builder ["Apples" "Bananas"] [])))))
+    ;; more elements than available
+    (is (= [{:name "Cereal A" :rating "90.5"}
+            {:name "Cereal B" :rating "85.3"}
+            {:name "Cereal C" :rating "70.2"}]
+           (top-rank :rating
+                     [{:name "Cereal A" :rating "90.5"}
+                      {:name "Cereal B" :rating "85.3"}
+                      {:name "Cereal C" :rating "70.2"}]
+                     5)))
+
+    ;; empty coll
+    (is (= []
+           (top-rank :rating [] 3)))
+
+    ;; n = 0
+    (is (= []
+           (top-rank :rating
+                     [{:name "Cereal A" :rating "90.5"}
+                      {:name "Cereal B" :rating "85.3"}]
+                     0)))))
