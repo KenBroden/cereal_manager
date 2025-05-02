@@ -79,6 +79,13 @@
 ;; and returns a new collection with all the duplicates removed
 ;; so then we have a collection of all the unique manufacturers
 
+;; lowest-avg-cal sets a lowest variable to nil, and then
+;; iterates over the distinct manufacturers and checks the current lowest
+;; against the current average calories for the manufacturer
+
+;; when nil the lowest is automatically set to the first manufacturer through
+;; the if statement. 
+
 ;; ~~~~~~~~~~~~~~~~~~~Implementation~~~~~~~~~~~~~~~~~~~~
 
 ;; println avg calories by Kellogg's
