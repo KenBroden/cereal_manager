@@ -79,10 +79,10 @@
   "takes a key and a collection, and a optional compare operator -> 
    returns the collection sorted by the key"
   ([key coll] ;; 2 arguments
-   (sort-by #(Integer/parseInt (% key)) coll))
+   (sort-by #(Double/parseDouble (% key)) coll))
 
   ([key comparator coll] ;; second option, 3 arguments
-   (sort-by #(Integer/parseInt (% key)) comparator coll)))
+   (sort-by #(Double/parseDouble (% key)) comparator coll)))
 
 ;; essential just a specialized version of the higher order sort-by function
 ;; which takes a keyword and a collection and sorts the collection by the key
