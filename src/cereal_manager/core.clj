@@ -41,11 +41,11 @@
          (take 10 cereal) "\n")
 
 ;; output data to a new csv file
-(defn output-data
-  "takes a file path and data -> writes the data to a .csv file"
-  [file-path data]
-  (with-open [writer (io/writer file-path)]
-    (csv/write-csv writer (cons (keys (first data)) data))))
+;; (defn output-data
+;;   "takes a file path and data -> writes the data to a .csv file"
+;;   [file-path data]
+;;   (with-open [writer (io/writer file-path)]
+;;     (csv/write-csv writer (cons (keys (first data)) data))))
 
 
 ;; QUESTION: On average, which cereal manufacturer’s cereal has the fewest calories per serving?
@@ -160,3 +160,17 @@
                                     (map #(select-keys % [:name :rating])
                                          (bottom-rank :rating cereal 10)))]
   (println (str index ". " cereal))) ;; adds index with a period to front.
+
+;; Map full manufacturer names for :mfr keys
+(def manufacturer-names
+  {"A" "American Home Food Products"
+   "G" "General Mills"
+   "K" "Kelloggs"
+   "N" "Nabisco"
+   "P" "Post"
+   "Q" "Quaker Oats"
+   "R" "Ralston Purina"})
+
+;; Implement manufacturer name mapping to lowest-avg-cal function result
+(println "\nManufacturer with lowest average calories (full manufacturer name): \n"
+         (update (lowest-avg-cal cereal) :mfr manufacturer-names))
