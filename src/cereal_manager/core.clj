@@ -1,7 +1,8 @@
 (ns cereal-manager.core
   (:require
    [clojure.data.csv :as csv] ;; for handling csv files
-   [clojure.java.io :as io])) ;; for file reading
+   [clojure.java.io :as io] ;; for file reading
+   [clojure.string :as str])) ;; for string manipulation
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~Cereal Manager~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; This program is a cereal manager that loads a csv file of cereal data
@@ -37,16 +38,23 @@
   (load-data "resources/cereal.csv"))
 
 ;; see the data file structure here:
-(println "\n First 10 rows of data after loading in: "
+(println "\n First 10 rows of data after loading in: \n"
          (take 10 cereal) "\n")
 
-;; output data to a new csv file
-;; (defn output-data
-;;   "takes a file path and data -> writes the data to a .csv file"
-;;   [file-path data]
-;;   (with-open [writer (io/writer file-path)]
-;;     (csv/write-csv writer (cons (keys (first data)) data))))
+;; Formats our hashmap data into a string (Just for readability in the console)
+(defn format-cereal-data
+  "Formats a collection of hashmaps into a readable string format."
+  [data]
+  (map (fn [entry]
+         (clojure.string/join
+          ", "
+          (map (fn [[key val]] (str (name key) ": " val)) entry)))
+       data))
 
+;; see the data structure after put through format-cereal-data
+(println "\nFormatted data: ")
+(doseq [cereal (format-cereal-data (take 10 cereal))] ;; only show first 10 rows
+  (println cereal))
 
 ;; QUESTION: On average, which cereal manufacturer’s cereal has the fewest calories per serving?
 ;; ~~~~~~~~~~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
@@ -96,6 +104,10 @@
 (println "Manufacturer with lowest average calories: \n"
          (lowest-avg-cal cereal))
 
+;; This was our most complex function, but still just implements higher order functions 
+;; and a anonymous function to do the comparison. distinct was very helpful to get all
+;; the manufacturers without duplicates.
+
 ;; QUESTION: What are the sugar contents of the cereals? sort from least to most.
 ;; ~~~~~~~~~~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
@@ -132,6 +144,10 @@
    -> returns the top n elements of the collection sorted by the key"
   [key coll n]
   (take n (sort-cereal-by key > coll))) ;; uses the comparator to sort the collection
+
+;; What was interesting about this function was its capacity to take a
+;; comparator as an argument.  This was a feature of the sort-by function
+;; which we deliberately inherited.
 
 ;; bottom 10 of a sorting key
 (defn bottom-rank
@@ -171,6 +187,14 @@
    "Q" "Quaker Oats"
    "R" "Ralston Purina"})
 
-;; Implement manufacturer name mapping to lowest-avg-cal function result
-(println "\nManufacturer with lowest average calories (full manufacturer name): \n"
-         (update (lowest-avg-cal cereal) :mfr manufacturer-names))
+;; Implement manufacturer name mapping to lowest-avg-cal function result. Also applied format-cereal-data
+(println "\nManufacturer with lowest average calories (full manufacturer name and data reformatted): \n"
+         (format-cereal-data
+          [(update (lowest-avg-cal cereal) :mfr manufacturer-names)]))
+
+
+
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~~~~~~~~~
+(println "\n")
+

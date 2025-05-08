@@ -31,9 +31,6 @@ This project is part of CSci 2601 and focuses on analyzing a dataset of 80 cerea
     "2.000"
     ```
 
-- Explores advanced Clojure features such as macros, transducers, or parallel execution.
-- Provides tutorials and exercises for selected functions.
-
 ## Usage
 
 This library provides functions to load the dataset and perform the above operations. To get started, ensure you have the dataset downloaded from [Kaggle](https://www.kaggle.com/datasets/crawford/80-cereals?resource=download) and follow the instructions in the source code.
