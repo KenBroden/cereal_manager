@@ -94,7 +94,7 @@
 ;; when nil the lowest is automatically set to the first manufacturer through
 ;; the if statement. 
 
-;; ~~~~~~~~~~~~~~~~~~~Implementation~~~~~~~~~~~~~~~~~~~~
+;; ~~~~~~~~~~~~~~~~~~~Implementation Question 1~~~~~~~~~~~~~~~~~~~~
 
 ;; println avg calories by Kellogg's
 (println "\navg calories by Kellogg's: \n"
@@ -124,7 +124,7 @@
 ;; which takes a keyword and a collection and sorts the collection by the key
 ;; The specialized version parses the key as an int, since the data is loaded as a string
 
-;; ~~~~~~~~~~~~~~~~~~~Implementation~~~~~~~~~~~~~~~~~~~~
+;; ~~~~~~~~~~~~~~~~~~~Implementation Question 2~~~~~~~~~~~~~~~~~~~~
 
 ;; sort-cereal-by calories
 (println "\nWhat are the sugar contents of the cereals? sort from least to most.")
@@ -159,7 +159,7 @@
 ;; this question wasn't asked, but it was an easy one to add, and interesting results.
 
 
-;; ~~~~~~~~~~~~~~~~~~~Implementation~~~~~~~~~~~~~~~~~~~~
+;; ~~~~~~~~~~~~~~~~~~~Implementation Question 3~~~~~~~~~~~~~~~~~~~~
 (println "\nWhat are the 10 highest-rated cereals based on Consumer Reports?")
 (println "top 10 cereals by rating: ")
 (doseq [[index cereal] (map-indexed (fn [i cereal] [(inc i) cereal]) ;; Increment index
@@ -177,6 +177,8 @@
                                          (bottom-rank :rating cereal 10)))]
   (println (str index ". " cereal))) ;; adds index with a period to front.
 
+
+;; Added after presentation, probably belongs in Data Handling section
 ;; Map full manufacturer names for :mfr keys
 (def manufacturer-names
   {"A" "American Home Food Products"
